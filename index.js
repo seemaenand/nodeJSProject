@@ -5,6 +5,10 @@ const port = 8000;
 
 app.use('/',require('./...routes/index'));
 
+// now we need to tell them to use ejs as my view engine - set up the view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 // to start the server
 app.listen(port, function(err){
     if(err){
