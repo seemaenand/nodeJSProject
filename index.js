@@ -9,6 +9,10 @@ app.use(express.static('./assets'));
 
 app.use(expressLayouts);
 
+// extract styles and scripts from sub pages into the layout
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 app.use('/',require('./...routes/index'));
 
 // now we need to tell them to use ejs as my view engine - set up the view engine
