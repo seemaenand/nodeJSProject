@@ -11,3 +11,27 @@ module.exports.post=function(req,res){
         title :"Post"
     });
 }
+
+// render the sign Up page
+module.exports.signUp = function(req, res){
+    return res.render('users_sign_up',{
+        title : "Codeial | Sign Up"
+    })
+}
+
+// render the sign In page
+module.exports.signIn = function(req, res){
+    return res.render('users_sign_in',{
+        title : "Codeial | Sign In"
+    })
+}
+
+// get the sign up data
+module.exports.create=function(req, res){
+    // to do later
+}
+
+//sign in and create a session for the user
+module.exports.createSession=function(req, res){
+    // to do later
+}
