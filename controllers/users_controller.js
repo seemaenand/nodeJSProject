@@ -16,6 +16,11 @@ module.exports.post=function(req,res){
 
 // render the sign Up page
 module.exports.signUp = function(req, res){
+    // we dont want to show the sign up and sign in page if user is already signed up 
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
+
     return res.render('users_sign_up',{
         title : "Codeial | Sign Up"
     })
@@ -23,6 +28,11 @@ module.exports.signUp = function(req, res){
 
 // render the sign In page
 module.exports.signIn = function(req, res){
+     // we dont want to show the sign up and sign in page if user is already signed up 
+     if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
+
     return res.render('users_sign_in',{
         title : "Codeial | Sign In"
     })
