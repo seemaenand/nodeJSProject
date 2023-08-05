@@ -5,7 +5,9 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
 
-router.get('/profile', usersController.profile);
+// we want the profile page to be accessible only when signed in so we edit the code in the next line
+// router.get('/profile', usersController.profile);
+router.get('/profile', passport.checkAuthentication, usersController.profile);
 router.get('/post', usersController.post);
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
