@@ -86,5 +86,6 @@ module.exports.create = async function (req, res) {
 
 //sign in and create a session for the user
 module.exports.createSession=function(req, res){
-    // to do later
+    // now that we have set up passport and express-sessions and required it in the index.js
+    return res.redirect('/');
 }
