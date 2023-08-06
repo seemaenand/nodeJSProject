@@ -99,3 +99,12 @@ module.exports.createSession=function(req, res){
     // now that we have set up passport and express-sessions and required it in the index.js
     return res.redirect('/');
 }
+
+module.exports.destroySession=function(req, res, next){
+    req.logout(function(err) {
+      if (err) { return next(err); }
+    //   added above as callback required
+      res.redirect('/');
+    });
+  }
+    

@@ -14,7 +14,8 @@ const session = require('express-session');
 // lets also require passport and the local strategy 
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-
+// define mongo store
+const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded());
 
@@ -49,7 +50,18 @@ app.use(session({
     cookie:{
         maxAge :(1000*60*100)
         // this is summed up in minutes therefore the conversion from milliseconds
+    },
+    // mongo store is used to store the session cookie in the db
+    store : new MongoStore({
+        // mongooseConnection : db, - this does not work so changing to below
+        mongoUrl : "mongodb://127.0.0.1/codeial", 
+        autoremove : 'disabled'
+    },
+    // call back function in case the connection is not established
+    function(err){
+        console.log(err || 'connect - mongodb setup ok');
     }
+    )
 }));
 
 // we need to now tell the app to use passport
