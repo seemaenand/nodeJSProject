@@ -1,10 +1,14 @@
-<header>
-    <div id="header-name">
-        <p>
-        CODEIAL
+<header id="layout-header">
+    <nav>
+        <div class="mini-logo">
+            <p>
+                <a href='/'>
+                    codeial
+                </a>
             </p>
-
-    <p>
+        </div>
+    
+        <div class="auth-links">
     <!-- creating a sign out if logged in and sign in / up if not logged in - to display on website page accordingly -->
     <ul>
         <% if (locals.user){ %>
@@ -29,6 +33,9 @@
 
         <% } %>
     </ul>
-    </p>
 </div>
+</nav>
+
+
+
 </header>
