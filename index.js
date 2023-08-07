@@ -16,6 +16,17 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 // define mongo store
 const MongoStore = require('connect-mongo');
+// lets require node-sass
+const sassMiddleware = require('node-sass-middleware');
+
+// lets put some settings for the sass. we need to do this before starting the server
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:true,
+    outputStyle:'extended',
+    prefix:'/css'
+}));
 
 app.use(express.urlencoded());
 
