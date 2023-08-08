@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
     // this schema will have the following fields
     content : {
-        type : string,
+        type : String,
         required : true
     },
     user :{
