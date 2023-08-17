@@ -7,7 +7,17 @@ const Post = require('../models/post');
 //     // now we want to render an ejs file
 
 //     // lets find all the posts
-//     Post.find({}.populate('user').exec(function(err, posts){
+//     Post.find({}
+// .populate('user')
+// .populate(
+//     {
+//         path : 'comments',
+//         populate : {
+//             path : 'user'
+//         }
+//     }
+// )
+// .exec(function(err, posts){
 //         return res.render('home', {
 //             title :"Codeial || Home",
 //             posts : posts
@@ -33,7 +43,15 @@ module.exports.home = async function(req, res) {
         // Now we want to render an EJS file
 
         // Let's find all the posts using async/await
-        const posts = await Post.find({}).populate('user').exec();
+        const posts = await Post.find({})
+            .populate('user')
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'user'
+                }
+            })
+            .exec();
 
         return res.render('home', {
             title: "Codeial || Home",
