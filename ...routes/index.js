@@ -9,6 +9,8 @@ router.get('/', homeController.home );
 // router.use('/users', require('./users'));
 router.use('/users', require('./users'));
 router.use('/posts', require('./posts'));
+// the comments router has to be required
+router.use('/comments', require('./comments'));
 
 // console.log("Router is set");
 
