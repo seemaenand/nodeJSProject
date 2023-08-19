@@ -1,5 +1,6 @@
 // import post Schema
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 
 // module.exports.create=function(req, res){
 //     Post.create({
@@ -29,3 +30,28 @@ module.exports.create = async function (req, res) {
         return;
     }
 };
+
+// create an action to delete posts
+
+module.exports.destroy = function(req, res){
+    // we need to first check if the user logged in is actually the user of the post
+    Post.findById(req.params.id, function(err, post){
+        // if it is the user of the post and we get the post
+        // .id means converting the object id to string
+
+        if(post.user == req.user.id){
+            post.remove();
+            // next we delete the comments of that particular post
+            Comment.deleteMany({
+                post : req.param.id
+            }, function(err){
+                return res.redirect('back');
+            });
+
+        }
+        // but what if the user does not match
+        else{
+            return res.redirect('back');
+        }
+    });
+}
