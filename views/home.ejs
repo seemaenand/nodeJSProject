@@ -18,6 +18,12 @@
             <% for (post of posts){%>
             
                 <li>
+                    <!-- creating the delete button and the same should be visible only if the user is signed in  -->
+                    <% if(locals.user && locals.user.id == post.user.id){%>
+                    <small>
+                        <a href="/posts/destroy/<%=post.id%>"> X </a>
+                    </small>
+                   <% } %>
                     <p>
                     <%= post.content %>
                     <br>
