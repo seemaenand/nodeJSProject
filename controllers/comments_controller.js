@@ -73,6 +73,32 @@ module.exports.create = async function(req, res) {
 
 // the above code does not work any more
 
+// module.exports.destroy = async function(req, res) {
+//     try {
+//         const comment = await Comment.findById(req.params.id);
+        
+//         if (comment && comment.user.toString() === req.user.id.toString()) {
+//             const postId = comment.post;
+            
+//             await comment.remove();
+            
+//             await Post.findByIdAndUpdate(postId, {
+//                 $pull: {
+//                     comments: req.params.id
+//                 }
+//             });
+
+//             return res.redirect('back');
+//         } else {
+//             return res.redirect('back');
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         return res.redirect('back');
+//     }
+// };
+
+
 module.exports.destroy = async function(req, res) {
     try {
         const comment = await Comment.findById(req.params.id);
@@ -80,7 +106,7 @@ module.exports.destroy = async function(req, res) {
         if (comment && comment.user.toString() === req.user.id.toString()) {
             const postId = comment.post;
             
-            await comment.remove();
+            await comment.deleteOne(); // Corrected line
             
             await Post.findByIdAndUpdate(postId, {
                 $pull: {
@@ -97,3 +123,9 @@ module.exports.destroy = async function(req, res) {
         return res.redirect('back');
     }
 };
+
+
+
+
+
+
