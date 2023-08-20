@@ -52,3 +52,48 @@ module.exports.create = async function(req, res) {
         res.redirect('/');
     }
 };
+
+// to delete comments
+// module.exports.destroy=function(req, res){
+//     Comment.findById(req.params.id, function(err, comment){
+//         if(comment.user == req.user.id){
+//             // we need to find the post for which the comment has to be deleted
+//             let postId = comment.post;
+//             comment.remove();
+//             Post.findByIdAndUpdate(postId, { $pull :{
+//                 comments : req.params.id
+//             }}, function(err, post){
+//                 return res.redirect('back');
+//             })
+//         } else {
+//             return res.redirect('back');
+//         }
+//     });
+// }
+
+// the above code does not work any more
+
+module.exports.destroy = async function(req, res) {
+    try {
+        const comment = await Comment.findById(req.params.id);
+        
+        if (comment && comment.user.toString() === req.user.id.toString()) {
+            const postId = comment.post;
+            
+            await comment.remove();
+            
+            await Post.findByIdAndUpdate(postId, {
+                $pull: {
+                    comments: req.params.id
+                }
+            });
+
+            return res.redirect('back');
+        } else {
+            return res.redirect('back');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.redirect('back');
+    }
+};
