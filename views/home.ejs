@@ -17,55 +17,8 @@
         <ul>
             <% for (post of posts){%>
             
-                <li>
-                    <!-- creating the delete button and the same should be visible only if the user is signed in  -->
-                    <% if(locals.user && locals.user.id == post.user.id){%>
-                    <small>
-                        <a href="/posts/destroy/<%= post.id%>"> X </a>
-                    </small>
-                   <% } %>
-                    <p>
-                    <%= post.content %>
-                    <br>
+               <%- include('_post') %>
 
-                    <small>
-                        <%= post.user.name %>
-                    </small>
-                    </p>
-                    <!-- form for comments -->
-                    <div class="post-comments">
-                        <!-- we need to show this form only to those who have signed in -->
-                        <% if(locals.user){%>
-                        <!-- create a form -->
-                        <form action="/comments/create" method="post">
-                            <input type="text" name="content" placeholder="Type here to add comments..." required>
-                            <!-- now we need to send the post id for which these comments are posted -->
-                            <input type="hidden" name="post" value="<%=post._id%>">
-                            <input type="submit" value="Add Comment">
-                        </form>      
-                        <%}%>
-
-                        <!-- to display comments - we dont want the viewer to be logged in to see the comments -->
-                        <div class="post-comments-list">
-                            <ul id="post-comments-<%= post._id %>">
-                                <% for(comment of post.comments){%>
-                                <p>
-                                    <% if(locals.user && locals.user.id == comment.user.id){%>
-                                        <small>
-                                            <a href="/comments/destroy/<%=comment.id%>"> X </a>
-                                        </small>
-                                       <% } %>
-                                    <%= comment.content%>
-                                    <br>
-                                    <small>
-                                        <%= comment.user.name %>
-                                    </small>
-                                </p>
-                                <%}%>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
             <%}%>
 
         </ul>     
