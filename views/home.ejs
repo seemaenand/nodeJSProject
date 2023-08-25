@@ -31,9 +31,10 @@
     <!-- for the list of users -->
     <% for(u of all_users){ %>
         <p>
-            <a href="/users/profile/<%u.id%>">
+            <!-- <%console.log(u.id)%> -->
+            <a href="/users/profile/<%=u.id%>">
                 <!-- to display the name of the users -->
-                <%= u.name %>
+                <%=u.name%>
             </a>
         </p>
    <% } %>
