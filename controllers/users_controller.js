@@ -1,11 +1,33 @@
 const User = require('../models/users');
 
-module.exports.profile=function(req,res){
-    // res.end('<h1>User profile</h1>');
-    return res.render('users_profile', {
-        title :"Profile"
-    });
-}
+// module.exports.profile=function(req,res){
+//     // res.end('<h1>User profile</h1>');
+//     User.findById(req.params.id, function(err, user){
+//         return res.render('users_profile', {
+//             title :"Profile",
+//             profile_user : user
+//     })
+    
+//     });
+// }
+
+// above code to be replaced as below
+module.exports.profile = async function(req, res){
+    try {
+        const user = await User.findById(req.params.id);
+        if (user) {
+            return res.render('users_profile', {
+                title: "Profile",
+                profile_user: user
+            });
+        } else {
+            return res.end('<h1>User not found</h1>');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.end('<h1>Error in rendering user profile</h1>');
+    }
+};
 
 module.exports.post=function(req,res){
     // res.end('<h1>User post</h1>');

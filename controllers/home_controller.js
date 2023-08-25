@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/users');
 
 // module.exports.home=function(req,res){
 //     // console.log(req.cookies);
@@ -18,9 +19,15 @@ const Post = require('../models/post');
 //     }
 // )
 // .exec(function(err, posts){
+//     to find all the users
+//     User.find({
 //         return res.render('home', {
-//             title :"Codeial || Home",
-//             posts : posts
+//             //             title :"Codeial || Home",
+//             //             posts : posts,
+//             all_users : users
+//     })
+
+        
 //         });
 //     });
 
@@ -52,10 +59,11 @@ module.exports.home = async function(req, res) {
                 }
             })
             .exec();
-
+            const users = await User.find({});
         return res.render('home', {
             title: "Codeial || Home",
-            posts: posts
+            posts: posts,
+            all_users : users
         });
     } catch (err) {
         console.error(err);
