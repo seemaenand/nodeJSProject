@@ -36,6 +36,32 @@ module.exports.post=function(req,res){
     });
 }
 
+// module.exports.update = function(req, res){
+//     if(req.user.id == req.params.id){
+//         User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+//             return res.redirect('back');
+//         });
+//     } else {
+//         return res.status(401).send('Unauthorized');
+//     }
+// }
+
+// the above code needs to be updated 
+
+module.exports.update = async function(req, res) {
+    try {
+        if (req.user.id.toString() === req.params.id) {
+            const user = await User.findByIdAndUpdate(req.params.id, req.body);
+            return res.redirect('back');
+        } else {
+            return res.status(401).send('Unauthorized');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.redirect('back');
+    }
+};
+
 // render the sign Up page
 module.exports.signUp = function(req, res){
     // we dont want to show the sign up and sign in page if user is already signed up 
