@@ -144,15 +144,22 @@ module.exports.create = async function (req, res) {
 
 //sign in and create a session for the user
 module.exports.createSession=function(req, res){
+    // flash message
+    req.flash('success', 'Logged in successfully');
     // now that we have set up passport and express-sessions and required it in the index.js
     return res.redirect('/');
 }
 
 module.exports.destroySession=function(req, res, next){
-    req.logout(function(err) {
+    req.logout(function(err)
+    
+    {
       if (err) { return next(err); }
     //   added above as callback required
+    // flash message
+    req.flash('success', 'You have logged out successfully!');
       res.redirect('/');
     });
+    
   }
     
