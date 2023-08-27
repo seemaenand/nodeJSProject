@@ -1,5 +1,22 @@
+<!-- <html>
+    <head> -->
+    
+        <link rel="stylesheet" href="/css/home.css">
+    <!-- </head>
 
-<link rel="stylesheet" href="/css/home.css">
+    <body> -->
+
+        <!-- moving the header part into _header.ejs -->
+<!-- <header>
+    Page Header
+</header> -->
+
+<!-- to include the header file -->
+<!-- <%- ('_header'); %> -->
+
+<!-- <h1>
+    Codeial / Home
+</h1> -->
 
 <div id="home-container">
 
@@ -7,24 +24,24 @@
         <h4>Posts</h4>
         <!-- to check if user is signed in only then display the form -->
         <% if(locals.user){%>
-        <form action="/posts/create" id="new-post-form" method="POST">
-            <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
-            <input type="submit" value="Post">
-        </form>
-        <%}%>
-        <!-- to view the posts on the home page -->
-        <div id="posts-list-container">
-            <ul>
-                <% for (post of posts){%>
-                
-                   <%- include('_post') %>
-    
-                <%}%>
-    
-            </ul>     
-        </div>
+            <form action="/posts/create" id="new-post-form" method="POST">
+                <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
+                <input type="submit" value="Post">
+            </form>
+            <%}%>
+                <!-- to view the posts on the home page -->
+                <div id="posts-list-container">
+                    <ul>
+                        <% for (post of posts){%>
+
+                            <%- include('_post') %>
+
+                                <%}%>
+
+                    </ul>
+                </div>
     </section>
-    
+
     <!-- section to show all the users -->
     <section id="user-friends">
         <h4>Friends</h4>
@@ -37,8 +54,15 @@
                     <%=u.name%>
                 </a>
             </p>
-       <% } %>
+            <% } %>
     </section>
-    
+
 </div>
- 
+<!-- moving the footer part into _footer.ejs -->
+<!-- <footer>
+    Page Footer
+</footer> -->
+<!-- to include the footer file -->
+<!-- <%- ('_footer'); %>
+</body>
+</html> -->
